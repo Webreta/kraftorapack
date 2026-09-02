@@ -33,6 +33,7 @@ export async function saveHero(_prev: ActionState, formData: FormData): Promise<
   const hero = {
     desktop: { ...current.hero.desktop },
     mobile: { ...current.hero.mobile },
+    title: readL(formData, "title"),
     alt: readL(formData, "alt"),
   };
 

@@ -11,7 +11,8 @@ export function pickImage(img: LImage, lang: "tr" | "en"): string | null {
 }
 
 export type GeneralSettings = {
-  hero: { desktop: LImage; mobile: LImage; alt: L };
+  // Banner görseli yazısız; başlık HTML olarak üstüne basılır (satır sonu için \n)
+  hero: { desktop: LImage; mobile: LImage; title: L; alt: L };
   // Header altındaki yeşil kayan şerit
   marquee: L;
   features: { title: L; highlight: L; text: L; items: IconCard[] };
@@ -32,6 +33,7 @@ export const defaultGeneralSettings: GeneralSettings = {
   hero: {
     desktop: { tr: "/banner-desktop.jpg", en: "/banner-desktop.jpg" },
     mobile: { tr: "/banner-mobile.jpg", en: "/banner-mobile.jpg" },
+    title: { tr: "Sürdürülebilir Ambalaj,\nGüçlü Etki", en: "Sustainable Packaging,\nPowerful Impact" },
     alt: { tr: "Sürdürülebilir Ambalaj, Güçlü Etki", en: "Sustainable Packaging, Powerful Impact" },
   },
   marquee: {

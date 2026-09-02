@@ -42,9 +42,16 @@ export function HeroForm({ initial }: { initial: GeneralSettings }) {
   const [state, action, pending] = useActionState<ActionState, FormData>(saveHero, {});
   return (
     <form action={action} className={cardCls}>
+      <LTextarea
+        name="title"
+        label="Banner başlığı (görselin üstüne basılır)"
+        value={initial.hero.title}
+        rows={2}
+        hint="Satır sonu için Enter kullanın; masaüstünde solda, mobilde ortada üstte görünür."
+      />
       <p className="text-xs text-muted">
-        Banner üzerinde metin bulunduğu için her dil için ayrı görsel yüklenebilir. İngilizce görsel boşsa
-        Türkçe görsel gösterilir.
+        Görseller yazısız olmalı; başlık yukarıdaki alandan basılır. İstenirse her dil için ayrı görsel
+        yüklenebilir, İngilizce görsel boşsa Türkçe görsel gösterilir.
       </p>
       <div className="grid gap-4 md:grid-cols-2">
         <ImageField name="desktop.tr" label="Masaüstü banner — TR (2560×600 önerilir)" current={initial.hero.desktop.tr} aspect="aspect-[2560/600]" />

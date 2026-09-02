@@ -37,29 +37,44 @@ export default async function HomePage({ params }: { params: Promise<{ lang: str
   const homeProducts = products.filter((p) => p.showOnHome);
   const heroDesktop = pickImage(general.hero.desktop, lang);
   const heroMobile = pickImage(general.hero.mobile, lang);
+  const heroLines = t(general.hero.title, lang).split("\n").filter((l) => l.trim());
 
   return (
     <>
-      {/* Hero: masaüstünde geniş, mobilde kare banner; dile göre ayrı görsel */}
+      {/* Hero: masaüstünde geniş, mobilde kare banner; başlık görselin üstüne basılır */}
       <section>
-        {heroDesktop && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={heroDesktop}
-            alt={t(general.hero.alt, lang)}
-            fetchPriority="high"
-            className="hidden w-full md:block"
-          />
-        )}
-        {heroMobile && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={heroMobile}
-            alt={t(general.hero.alt, lang)}
-            fetchPriority="high"
-            className="w-full md:hidden"
-          />
-        )}
+        {/* Masaüstü */}
+        <div className="relative hidden md:block">
+          {heroDesktop && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={heroDesktop} alt={t(general.hero.alt, lang)} fetchPriority="high" className="w-full" />
+          )}
+          {heroLines.length > 0 && (
+            <h1 className="absolute left-[15.5%] top-1/2 -translate-y-1/2 text-[3vw] font-extrabold leading-[1.15] text-[#0f3d26]">
+              {heroLines.map((line, i) => (
+                <span key={i} className="block">
+                  {line}
+                </span>
+              ))}
+            </h1>
+          )}
+        </div>
+        {/* Mobil */}
+        <div className="relative md:hidden">
+          {heroMobile && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={heroMobile} alt={t(general.hero.alt, lang)} fetchPriority="high" className="w-full" />
+          )}
+          {heroLines.length > 0 && (
+            <h1 className="absolute inset-x-4 top-[16%] text-center text-[6.6vw] font-extrabold leading-[1.15] text-[#0f3d26]">
+              {heroLines.map((line, i) => (
+                <span key={i} className="block">
+                  {line}
+                </span>
+              ))}
+            </h1>
+          )}
+        </div>
       </section>
 
       <Marquee text={t(general.marquee, lang)} />
