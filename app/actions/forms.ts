@@ -130,7 +130,7 @@ export async function submitQuote(_prev: FormState, formData: FormData): Promise
   // Alan etiketleri panelde okunabilir olsun diye "label:<ad>" girdileriyle gelir.
   const skip = new Set(["product", "name", "email", "phone", "company", "notes", "lang", "website"]);
   const meta: Record<string, string> = { product: parsed.data.product };
-  const labels: Record<string, string> = {};
+  const labels: Record<string, string> = { product: lang === "tr" ? "Ürün" : "Product" };
   for (const [key, value] of formData.entries()) {
     if (typeof value !== "string") continue;
     if (key.startsWith("label:")) {
